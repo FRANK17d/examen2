@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD Usuarios y Publicaciones</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar" aria-label="Navegacion principal">
+        <a class="brand" href="/">CRUD Social</a>
+        <div class="session">
+          <span id="sessionStatus">Sin sesion</span>
+          <button id="logoutButton" class="button button-ghost hidden" type="button">Salir</button>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <p class="eyebrow">Express + MySQL + Sequelize</p>
+        <h1>Usuarios y publicaciones con imagen, autenticacion y rutas protegidas.</h1>
+        <p>
+          Sistema CRUD separado por capas: rutas, controladores, servicios, repositorios, validadores y middlewares.
+        </p>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section id="authSection" class="auth-grid" aria-label="Acceso al sistema">
+        <article class="panel">
+          <div class="panel-heading">
+            <p class="eyebrow">Nuevo usuario</p>
+            <h2>Registro</h2>
+          </div>
+          <form id="registerForm" class="form">
+            <label>
+              Nombre
+              <input name="nombre" type="text" autocomplete="name" required minlength="2" maxlength="100" />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="email" required />
+            </label>
+            <label>
+              Contraseña
+              <input name="password" type="password" autocomplete="new-password" required minlength="8" maxlength="72" />
+            </label>
+            <button class="button button-primary" type="submit">Crear cuenta</button>
+          </form>
+        </article>
+
+        <article class="panel panel-dark">
+          <div class="panel-heading">
+            <p class="eyebrow">Usuario existente</p>
+            <h2>Login</h2>
+          </div>
+          <form id="loginForm" class="form">
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="email" required />
+            </label>
+            <label>
+              Contraseña
+              <input name="password" type="password" autocomplete="current-password" required />
+            </label>
+            <button class="button button-light" type="submit">Entrar</button>
+          </form>
+        </article>
+      </section>
+
+      <section id="appSection" class="app-grid hidden" aria-label="Panel CRUD">
+        <article class="panel">
+          <div class="panel-heading">
+            <p class="eyebrow">Cuenta</p>
+            <h2>Mi perfil</h2>
+          </div>
+          <form id="profileForm" class="form">
+            <label>
+              Nombre
+              <input id="profileName" name="nombre" type="text" required minlength="2" maxlength="100" />
+            </label>
+            <label>
+              Email
+              <input id="profileEmail" name="email" type="email" required />
+            </label>
+            <label>
+              Nueva contraseña
+              <input id="profilePassword" name="password" type="password" minlength="8" maxlength="72" placeholder="Opcional" />
+            </label>
+            <div class="button-row">
+              <button class="button button-primary" type="submit">Actualizar</button>
+              <button id="deleteAccountButton" class="button button-danger" type="button">Eliminar cuenta</button>
+            </div>
+          </form>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <p class="eyebrow">Contenido</p>
+            <h2 id="postFormTitle">Nueva publicacion</h2>
+          </div>
+          <form id="postForm" class="form" enctype="multipart/form-data">
+            <label>
+              Contenido
+              <textarea id="postContent" name="contenido" rows="5" required maxlength="5000"></textarea>
+            </label>
+            <label>
+              Imagen
+              <input id="postImage" name="imagen" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required />
+              <small class="field-help">Formatos permitidos: JPG, PNG, WEBP o GIF. Maximo 3 MB.</small>
+            </label>
+            <div class="button-row">
+              <button id="savePostButton" class="button button-primary" type="submit">Publicar</button>
+              <button id="cancelEditPostButton" class="button button-ghost hidden" type="button">Cancelar edicion</button>
+            </div>
+          </form>
+        </article>
+
+        <article class="panel panel-wide">
+          <div class="panel-heading row-heading">
+            <div>
+              <p class="eyebrow">Directorio</p>
+              <h2>Usuarios</h2>
+            </div>
+            <button id="reloadUsersButton" class="button button-ghost" type="button">Recargar</button>
+          </div>
+          <div id="usersList" class="users-list" aria-live="polite"></div>
+        </article>
+
+        <article class="panel panel-wide">
+          <div class="panel-heading row-heading">
+            <div>
+              <p class="eyebrow">Feed</p>
+              <h2>Publicaciones</h2>
+            </div>
+            <button id="reloadPostsButton" class="button button-ghost" type="button">Recargar</button>
+          </div>
+          <div id="postsList" class="posts-list" aria-live="polite"></div>
+        </article>
+      </section>
+    </main>
+
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  </body>
+</html>
