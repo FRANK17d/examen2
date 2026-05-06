@@ -122,17 +122,17 @@ La app queda disponible en `http://localhost:3000`.
 - `GET /api/publicaciones`
 - `GET /api/publicaciones/:id`
 - `POST /api/publicaciones` protegido, `multipart/form-data` con `contenido` e `imagen`
-- `PUT /api/publicaciones/:id` protegido, solo el dueno
-- `DELETE /api/publicaciones/:id` protegido, solo el dueno
+- `PUT /api/publicaciones/:id` protegido, solo el dueño
+- `DELETE /api/publicaciones/:id` protegido, solo el dueño
 
 ## Decisiones de buenas practicas
 
-- Controladores pequenos, sin reglas de negocio.
+- Controladores pequeños, sin reglas de negocio.
 - Servicios con reglas de negocio y autorizacion de propietario.
 - Repositorios para aislar Sequelize.
 - Validadores separados con `express-validator`.
 - Middleware global de errores.
-- Middleware de imagenes con filtro por MIME y limite de tamano.
+- Middleware de imagenes con filtro por MIME y limite de tamaño.
 - Validacion de firma del archivo para rechazar imagenes falsas.
 - Passwords hasheados con bcrypt.
 - JWT para rutas protegidas.
