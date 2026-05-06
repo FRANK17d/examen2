@@ -14,6 +14,7 @@ const notFoundMiddleware = require('./middlewares/notFound.middleware');
 
 const app = express();
 
+app.set('trust proxy', 1);
 app.use(helmet());
 app.use(cors({ origin: env.corsOrigin, credentials: true }));
 app.use(rateLimit({ windowMs: env.rateLimit.windowMs, limit: env.rateLimit.max }));
